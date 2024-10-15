@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vpn_app/src/constants.dart';
-import 'package:vpn_app/src/intro/Carousel.dart';
+import 'package:vpn_app/src/intro/carousel_details.dart';
 import 'package:vpn_app/src/vpn/vpn_page.dart';
 
 class IntroPage extends StatefulWidget {
@@ -24,15 +24,18 @@ class _IntroPageState extends State<IntroPage> {
             child: MaterialButton(
               minWidth: 180.0,
               padding: const EdgeInsets.symmetric(vertical: 15.0),
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
-              color: Theme.of(context).primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              color: const Color.fromARGB(255, 0, 94, 255), // Updated color
               textColor: Colors.white,
-              onPressed: () => {
+              onPressed: () {
                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => VpnPage()))
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => VpnPage(),
+                  ),
+                );
               },
               child: Text('GET STARTED'),
             ),
