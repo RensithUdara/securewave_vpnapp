@@ -10,16 +10,16 @@ class VpnPage extends StatefulWidget {
 
 class _VpnPageState extends State<VpnPage> {
   bool isConnected = false;
-  String buttonText = 'Disconnect'; // Initial value
-  String statusLabel = 'Connected'; // Initial status
-  Color statusColor = Colors.green; // Initial color
+  String buttonText = 'Connect Now'; // Initial value (swapped logic)
+  String statusLabel = 'Disconnected'; // Initial status
+  Color statusColor = Colors.grey; // Initial color for disconnected state
 
   void onConnect() {
     setState(() {
       isConnected = !isConnected;
-      buttonText = isConnected ? 'Connect Now' : 'Disconnect'; // Logic swap
-      statusLabel = isConnected ? 'Disconnected' : 'Connected'; // Logic swap
-      statusColor = isConnected ? Colors.grey : Colors.green; // Color swap
+      buttonText = isConnected ? 'Disconnect' : 'Connect Now'; // Logic swap
+      statusLabel = isConnected ? 'Connected' : 'Disconnected'; // Logic swap
+      statusColor = isConnected ? Colors.green : Colors.grey; // Color swap
     });
   }
 
@@ -27,35 +27,49 @@ class _VpnPageState extends State<VpnPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.lock_outline, color: Colors.black), // VPN lock icon
-              SizedBox(width: 10.0),
-              Text(
-                'SecureWave VPN',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0,
-                ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(80.0), // Taller AppBar
+          child: AppBar(
+            backgroundColor: Color.fromARGB(255, 0, 94, 255), // Vibrant blue color
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(26.0), // Rounded bottom edge for the AppBar
               ),
-            ],
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 1.0,
-          actions: [
-            IconButton(
-              icon: Icon(Icons.settings, color: Colors.black),
-              onPressed: () {
-                // Placeholder for settings button action
-              },
             ),
-          ],
+            title: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.lock_outline, color: Colors.white), // VPN lock icon
+                      SizedBox(width: 10.0),
+                      Text(
+                        'SecureWave VPN',
+                        style: TextStyle(
+                          color: Colors.white, // White text for contrast
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20.0, // Large, bold font
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 2.0),
+                Text(
+                  "Fast & Secure Connection",
+                  style: TextStyle(
+                    color: Colors.white70, // Subtle secondary text
+                    fontSize: 14.0,
+                  ),
+                ),
+              ],
+            ),
+            centerTitle: true,
+          ),
         ),
-        backgroundColor: Colors.blueGrey[50], // Soft background color
+        backgroundColor: Colors.grey[100], // Light background for modern design
         body: Column(
           children: [
             Expanded(

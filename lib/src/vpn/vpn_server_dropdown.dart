@@ -54,7 +54,8 @@ class _VpnServerDropDownState extends State<VpnServerDropDown> {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0), // Added internal padding for button
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 114, 159, 236), // Changed background color for a more prominent button
+            color: const Color.fromARGB(
+                255, 0, 94, 255), // Changed background color for a more prominent button
             borderRadius: BorderRadius.circular(15.0),
             boxShadow: [
               BoxShadow(
