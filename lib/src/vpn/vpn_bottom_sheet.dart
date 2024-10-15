@@ -16,34 +16,34 @@ class VpnBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[100], // Changed to a light grey for a modern look
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
-            blurRadius: 8.0,
-            spreadRadius: 2.0,
-            color: Colors.black.withOpacity(0.15),
-            offset: const Offset(0, 6),
+            blurRadius: 6.0,
+            spreadRadius: 1.0,
+            color: Colors.black.withOpacity(0.1),
+            offset: Offset(0, 4),
           )
         ],
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(35.0), // Larger radius for softer look
-          topRight: Radius.circular(35.0),
+          topLeft: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
         ),
       ),
-      padding: const EdgeInsets.all(24.0), // Increased padding for breathing space
-      height: MediaQuery.of(context).size.height * 0.55, // Slightly taller height
+      padding: const EdgeInsets.all(20.0),
+      height: MediaQuery.of(context).size.height * 0.5,
       child: Column(
         children: <Widget>[
           // Header Section
           Container(
-            margin: const EdgeInsets.only(bottom: 16.0), // Reduced margin for compactness
+            margin: const EdgeInsets.only(bottom: 20.0),
             child: Text(
-              'Choose a Server',
+              'Select a Server',
               style: TextStyle(
-                fontSize: 22.0, // Increased font size for header
-                fontWeight: FontWeight.w700, // Heavier font for prominence
-                letterSpacing: 1.5,
-                color: Colors.blueGrey[800], // Darker color for elegance
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),
@@ -51,40 +51,44 @@ class VpnBottomSheet extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemCount: servers.length,
-              itemBuilder: (BuildContext context, int index) => Card(
-                elevation: 6, // Increased elevation for depth
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0), // Larger border radius for rounded corners
-                ),
-                margin: const EdgeInsets.symmetric(vertical: 10.0), // Increased vertical spacing
-                child: ListTile(
-                  onTap: () => onServerTap(index),
-                  dense: true,
+              itemBuilder: (BuildContext context, int index) => Container(
+                height: 80, // Adjusted card height for more space
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Card(
+                  elevation: 6, // Consistent elevation for a clear, distinct look
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0), // Consistent rounded corners
+                    borderRadius: BorderRadius.circular(20.0), // Smooth, rounded corners
                   ),
-                  title: Text(
-                    servers[index]['name'],
-                    style: TextStyle(
-                      fontSize: 18.0, // Slightly larger font size for server names
-                      fontWeight: FontWeight.w600,
-                      color: selectedIndex == index
-                          ? Colors.blueAccent // Changed selected color for emphasis
-                          : Colors.black87, // Darker text color for unselected
+                  child: ListTile(
+                    onTap: () => onServerTap(index),
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 12.0, // Better padding for balance inside the card
+                      horizontal: 15.0,
                     ),
-                  ),
-                  leading: CircleAvatar(
-                    radius: 24.0, // Increased size of the avatar
-                    backgroundImage: AssetImage(servers[index]['icon']),
-                  ),
-                  trailing: Icon(
-                    selectedIndex == index
-                        ? Icons.check_circle_rounded // Changed icon to rounded checkmark
-                        : Icons.radio_button_unchecked,
-                    color: selectedIndex == index
-                        ? Colors.blueAccent // Changed trailing icon color
-                        : Colors.grey,
-                    size: 26.0, // Slightly increased icon size
+                    dense: true,
+                    title: Text(
+                      servers[index]['name'],
+                      style: TextStyle(
+                        fontSize: 18.0, // Slightly larger font for clarity
+                        fontWeight: FontWeight.bold,
+                        color: selectedIndex == index
+                            ? Theme.of(context).primaryColor
+                            : Colors.black87, // Clearer unselected color
+                      ),
+                    ),
+                    leading: CircleAvatar(
+                      radius: 24.0, // More balanced avatar size
+                      backgroundImage: AssetImage(servers[index]['icon']),
+                    ),
+                    trailing: Icon(
+                      selectedIndex == index
+                          ? Icons.check_circle_rounded // Rounded check icon for selection
+                          : Icons.radio_button_unchecked,
+                      color: selectedIndex == index
+                          ? Theme.of(context).primaryColor
+                          : Colors.grey,
+                      size: 24.0, // More proportionate icon size
+                    ),
                   ),
                 ),
               ),

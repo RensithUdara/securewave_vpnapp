@@ -10,16 +10,16 @@ class VpnPage extends StatefulWidget {
 
 class _VpnPageState extends State<VpnPage> {
   bool isConnected = false;
-  String buttonText = 'Connect Now';
-  String statusLabel = 'Disconnected';
-  Color statusColor = Colors.grey;
+  String buttonText = 'Disconnect'; // Initial value
+  String statusLabel = 'Connected'; // Initial status
+  Color statusColor = Colors.green; // Initial color
 
   void onConnect() {
     setState(() {
       isConnected = !isConnected;
-      buttonText = isConnected ? 'Disconnect' : 'Connect Now';
-      statusLabel = isConnected ? 'Connected' : 'Disconnected';
-      statusColor = isConnected ? Colors.green : Colors.grey;
+      buttonText = isConnected ? 'Connect Now' : 'Disconnect'; // Logic swap
+      statusLabel = isConnected ? 'Disconnected' : 'Connected'; // Logic swap
+      statusColor = isConnected ? Colors.grey : Colors.green; // Color swap
     });
   }
 
@@ -28,18 +28,34 @@ class _VpnPageState extends State<VpnPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'VPN',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 22.0,
-            ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.lock_outline, color: Colors.black), // VPN lock icon
+              SizedBox(width: 10.0),
+              Text(
+                'SecureWave VPN',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22.0,
+                ),
+              ),
+            ],
           ),
           centerTitle: true,
           backgroundColor: Colors.white,
           elevation: 1.0,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.settings, color: Colors.black),
+              onPressed: () {
+                // Placeholder for settings button action
+              },
+            ),
+          ],
         ),
+        backgroundColor: Colors.blueGrey[50], // Soft background color
         body: Column(
           children: [
             Expanded(
@@ -55,12 +71,12 @@ class _VpnPageState extends State<VpnPage> {
                     ),
                   ),
                   SizedBox(height: 20.0),
-                  
+
                   // VPN Connection Image
                   AnimatedSwitcher(
                     duration: Duration(milliseconds: 500),
                     child: Image.asset(
-                      isConnected ? AppAssets.online : AppAssets.offline,
+                      isConnected ? AppAssets.offline : AppAssets.online, // Image swap
                       key: ValueKey<bool>(isConnected),
                       height: 180,
                     ),
@@ -69,17 +85,17 @@ class _VpnPageState extends State<VpnPage> {
 
                   // Connect/Disconnect Button
                   MaterialButton(
-                    minWidth: 200.0,
+                    minWidth: 220.0, // Slightly wider button
                     padding: const EdgeInsets.symmetric(vertical: 15.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       side: BorderSide(
-                        color: isConnected ? Colors.green : Colors.transparent,
+                        color: isConnected ? Colors.grey : Colors.green, // Swapped border color
                         width: 2.0,
                       ),
                     ),
-                    color: isConnected ? Colors.white : Theme.of(context).primaryColor,
-                    textColor: isConnected ? Colors.green : Colors.white,
+                    color: isConnected ? Colors.white : Colors.green, // Button color swap
+                    textColor: isConnected ? Colors.grey : Colors.white, // Text color swap
                     onPressed: onConnect,
                     child: Text(
                       buttonText.toUpperCase(),
@@ -93,7 +109,7 @@ class _VpnPageState extends State<VpnPage> {
                 ],
               ),
             ),
-            
+
             // Server Selection Dropdown
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vpn_app/src/Constants.dart';
+import 'package:vpn_app/src/constants.dart';
 import 'package:vpn_app/src/intro/Carousel.dart';
 import 'package:vpn_app/src/vpn/vpn_page.dart';
 
